@@ -1,0 +1,3 @@
+[submodule "themes/stororokw"]
+	path = themes/stororokw
+	url = https://github.com/stororokw/hugo-stororokw.git
