@@ -1,5 +1,30 @@
-baseURL = 'https://example.org/'
+baseURL = 'https://stororokw.github.io/'
 languageCode = 'en-us'
-title = 'My New Hugo Site'
-
+title = 'stororokw'
 theme = 'stororokw'
+googleAnalytics = 'G-JQGPEX4S7S'
+
+[params]
+  github = 'https://github.com/stororokw'
+  bsky = 'https://stororokw.bsky.social'
+  email = 'stororokw@gmail.com'
+  math = true
+
+[markup]
+  [markup.tableOfContents]
+    endLevel = 6
+    ordered = false
+    startLevel = 2
+
+  [markup.highlight]
+    noClasses = false
+    codeFences = true
+    pygmentsUseClasses = true
+    pygmentsCodefences = true
+
+  [markup.goldmark]
+    [markup.goldmark.extensions]
+      [markup.goldmark.extensions.passthrough]
+        [markup.goldmark.extensions.passthrough.delimiters]
+          block = [['@@@', '@@@'], ['\[', '\]'], ['$$', '$$']]
+          inline = [['@@', '@@'], ['\(', '\)']]
