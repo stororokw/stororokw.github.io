@@ -1,0 +1,301 @@
+[
+  {
+    "DOI": "10.1145/3664475.3664544",
+    "ISBN": "9798400706837",
+    "URL": "https://doi.org/10.1145/3664475.3664544",
+    "author": [
+      {
+        "family": "Bailey",
+        "given": "Mike"
+      }
+    ],
+    "collection-title": "SIGGRAPH courses ’24",
+    "container-title": "ACM SIGGRAPH 2024 courses",
+    "id": "Bailey2024",
+    "issued": {
+      "date-parts": [
+        [
+          2024
+        ]
+      ]
+    },
+    "publisher": "Association for Computing Machinery",
+    "publisher-place": "New York, NY, USA",
+    "title": "A whirlwind introduction to computer graphics for complete beginners",
+    "type": "paper-conference"
+  },
+  {
+    "DOI": "10.1145/3664475.3664545",
+    "ISBN": "9798400706837",
+    "URL": "https://doi.org/10.1145/3664475.3664545",
+    "abstract": "The emphasis of this course focuses on the capabilities of the WebGL application programming interface (i.e., programming library, often called an API).",
+    "author": [
+      {
+        "family": "Shreiner",
+        "given": "Dave"
+      },
+      {
+        "family": "Angel",
+        "given": "Edward"
+      }
+    ],
+    "collection-title": "SIGGRAPH courses ’24",
+    "container-title": "ACM SIGGRAPH 2024 courses",
+    "id": "Shreiner2024",
+    "issued": {
+      "date-parts": [
+        [
+          2024
+        ]
+      ]
+    },
+    "publisher": "Association for Computing Machinery",
+    "publisher-place": "New York, NY, USA",
+    "title": "An introduction to creating real-time interactive computer graphics applications",
+    "type": "paper-conference"
+  },
+  {
+    "DOI": "10.1145/3664475.3664536",
+    "ISBN": "9798400706837",
+    "URL": "https://doi.org/10.1145/3664475.3664536",
+    "abstract": "Computer graphics relies on computing hardware for everything from animation to rendering. An emerging new technology exploits the properties of quantum objects to offer radically new ways to think about, create, and run algorithms. For example, quantum computers can evaluate many different input values simultaneously, where \"many\" can be larger than the number of atoms in the visible universe. The catch is that only one output can be obtained from each run.Quantum computing may change how we think about computer graphics. For example, future quantum computers may be able to intersect astronomical numbers of rays with a similarly massive database of objects in a single execution, or evaluate enormous numbers of simulation parameters in parallel to return the one set that produces a desired result.This course describes, without advanced math, the core ideas of quantum computing. We start with the quantum version of the classical bit (called a qubit) and the basic operators that modify qubits. We introduce the four essential properties that distinguish quantum computers from familiar classical computers: superposition, interference, entanglement, and measurement. We show how these properties are orchestrated to build quantum algorithms.We conclude with a brief overview of some of the most well-known quantum algorithms, and some of their possible applications in computer graphics.Quantum computers are already here, and are increasing in size and reliability at a rapid pace. Open-source simulators abound, and small quantum computers are even available for free use on the web.Classical hardware has served computer graphics well. Quantum computing offers a fundamentally new way to design and execute algorithms, which could change our field in fundamental ways. Now is the perfect time to starting thinking about quantum computing for graphics.",
+    "author": [
+      {
+        "family": "Glassner",
+        "given": "Andrew"
+      }
+    ],
+    "collection-title": "SIGGRAPH courses ’24",
+    "container-title": "ACM SIGGRAPH 2024 courses",
+    "id": "Glassner2024a",
+    "issued": {
+      "date-parts": [
+        [
+          2024
+        ]
+      ]
+    },
+    "publisher": "Association for Computing Machinery",
+    "publisher-place": "New York, NY, USA",
+    "title": "An introduction to quantum computing",
+    "type": "paper-conference"
+  },
+  {
+    "DOI": "10.1145/3664475.3664537",
+    "ISBN": "9798400706837",
+    "URL": "https://doi.org/10.1145/3664475.3664537",
+    "abstract": "The Fourier Transform is a fundamental tool in computer graphics. It explains where aliasing comes from, how to filter textures, why noise can be a good thing, how to simplify shapes, how to select sampling patterns, how the JPEG image compression scheme works, and why wagon wheels start to rotate backwards when they spin too fast. The Fourier Transform not only describes the source of many problems in graphics, it also often tells us how to avoid or suppress them.Understanding the Fourier transform gives us the ability to identify, diagnose, and fix objectionable artifacts that might otherwise remain mysterious in rendering, modeling, and animation code.Unfortunately, the Fourier Transform is unfamiliar to many people, and opaque to many others, often because they are put off by its technical language and complicated looking mathematics. Though the notation can be daunting at first contact, it’s really just a terse way of expressing specific sequences of multiplications and additions.In this course we only assume you know a little vector algebra, like the material in any graphics book (if you remember how to multiply two matrices, you’re all set). We’ll carefully build up to the full Discrete-Time Fourier Transform (and its inverse) that we use every day, taking small steps and illustrating the process with pictures.",
+    "author": [
+      {
+        "family": "Glassner",
+        "given": "Andrew"
+      }
+    ],
+    "collection-title": "SIGGRAPH courses ’24",
+    "container-title": "ACM SIGGRAPH 2024 courses",
+    "id": "Glassner2024b",
+    "issued": {
+      "date-parts": [
+        [
+          2024
+        ]
+      ]
+    },
+    "publisher": "Association for Computing Machinery",
+    "publisher-place": "New York, NY, USA",
+    "title": "An introduction to the fourier transform",
+    "type": "paper-conference"
+  },
+  {
+    "DOI": "10.1145/3664475.3664537",
+    "ISBN": "9798400706837",
+    "URL": "https://doi.org/10.1145/3664475.3664537",
+    "abstract": "The Fourier Transform is a fundamental tool in computer graphics. It explains where aliasing comes from, how to filter textures, why noise can be a good thing, how to simplify shapes, how to select sampling patterns, how the JPEG image compression scheme works, and why wagon wheels start to rotate backwards when they spin too fast. The Fourier Transform not only describes the source of many problems in graphics, it also often tells us how to avoid or suppress them.Understanding the Fourier transform gives us the ability to identify, diagnose, and fix objectionable artifacts that might otherwise remain mysterious in rendering, modeling, and animation code.Unfortunately, the Fourier Transform is unfamiliar to many people, and opaque to many others, often because they are put off by its technical language and complicated looking mathematics. Though the notation can be daunting at first contact, it’s really just a terse way of expressing specific sequences of multiplications and additions.In this course we only assume you know a little vector algebra, like the material in any graphics book (if you remember how to multiply two matrices, you’re all set). We’ll carefully build up to the full Discrete-Time Fourier Transform (and its inverse) that we use every day, taking small steps and illustrating the process with pictures.",
+    "author": [
+      {
+        "family": "Glassner",
+        "given": "Andrew"
+      }
+    ],
+    "collection-title": "SIGGRAPH courses ’24",
+    "container-title": "ACM SIGGRAPH 2024 courses",
+    "id": "Glassner2024c",
+    "issued": {
+      "date-parts": [
+        [
+          2024
+        ]
+      ]
+    },
+    "publisher": "Association for Computing Machinery",
+    "publisher-place": "New York, NY, USA",
+    "title": "An introduction to the fourier transform",
+    "type": "paper-conference"
+  },
+  {
+    "DOI": "10.1145/3664475.3664734",
+    "ISBN": "9798400706837",
+    "URL": "https://doi.org/10.1145/3664475.3664734",
+    "abstract": "We originally referred to \"real-time\" audio systems to draw a distinction with \"non-real-time\" systems where a series of audio samples is entirely determined and computed in advance, originally because computers were not fast enough to perform the needed mathematical calculations. If you can’t listen to the sound as it is produced, you won’t be able to change it live and know what you’re changing. Thus, the desire to turn a computer into something more like a \"musical instrument\" was a primary motivation in the development of real-time audio systems.",
+    "author": [
+      {
+        "family": "Zicarelli",
+        "given": "David"
+      }
+    ],
+    "collection-title": "SIGGRAPH courses ’24",
+    "container-title": "ACM SIGGRAPH 2024 courses",
+    "id": "Zicarelli2024",
+    "issued": {
+      "date-parts": [
+        [
+          2024
+        ]
+      ]
+    },
+    "publisher": "Association for Computing Machinery",
+    "publisher-place": "New York, NY, USA",
+    "title": "Advances in real time audio rendering - part 2",
+    "type": "paper-conference"
+  },
+  {
+    "DOI": "10.1145/3664475.3664565",
+    "ISBN": "9798400706837",
+    "URL": "https://doi.org/10.1145/3664475.3664565",
+    "author": [
+      {
+        "family": "Whitaker",
+        "given": "Mirinda"
+      },
+      {
+        "family": "Creem-Regehr",
+        "given": "Sarah"
+      },
+      {
+        "family": "Bodenheimer",
+        "given": "Bobby"
+      }
+    ],
+    "collection-title": "SIGGRAPH courses ’24",
+    "container-title": "ACM SIGGRAPH 2024 courses",
+    "id": "Whitaker2024",
+    "issued": {
+      "date-parts": [
+        [
+          2024
+        ]
+      ]
+    },
+    "publisher": "Association for Computing Machinery",
+    "publisher-place": "New York, NY, USA",
+    "title": "Bayesian statistics: A practical introduction for computer graphics",
+    "title-short": "Bayesian statistics",
+    "type": "paper-conference"
+  },
+  {
+    "DOI": "10.1145/3664475.3664526",
+    "ISBN": "9798400706837",
+    "URL": "https://doi.org/10.1145/3664475.3664526",
+    "author": [
+      {
+        "family": "Rhyne",
+        "given": "Theresa-Marie"
+      }
+    ],
+    "collection-title": "SIGGRAPH courses ’24",
+    "container-title": "ACM SIGGRAPH 2024 courses",
+    "id": "Rhyne2024a",
+    "issued": {
+      "date-parts": [
+        [
+          2024
+        ]
+      ]
+    },
+    "publisher": "Association for Computing Machinery",
+    "publisher-place": "New York, NY, USA",
+    "title": "Demystifying color in your digital media & data visualizations",
+    "type": "paper-conference"
+  },
+  {
+    "DOI": "10.1145/3664475.3664526",
+    "ISBN": "9798400706837",
+    "URL": "https://doi.org/10.1145/3664475.3664526",
+    "author": [
+      {
+        "family": "Rhyne",
+        "given": "Theresa-Marie"
+      }
+    ],
+    "collection-title": "SIGGRAPH courses ’24",
+    "container-title": "ACM SIGGRAPH 2024 courses",
+    "id": "Rhyne2024b",
+    "issued": {
+      "date-parts": [
+        [
+          2024
+        ]
+      ]
+    },
+    "publisher": "Association for Computing Machinery",
+    "publisher-place": "New York, NY, USA",
+    "title": "Demystifying color in your digital media & data visualizations",
+    "type": "paper-conference"
+  },
+  {
+    "DOI": "10.1145/3664475.3664526",
+    "ISBN": "9798400706837",
+    "URL": "https://doi.org/10.1145/3664475.3664526",
+    "author": [
+      {
+        "family": "Rhyne",
+        "given": "Theresa-Marie"
+      }
+    ],
+    "collection-title": "SIGGRAPH courses ’24",
+    "container-title": "ACM SIGGRAPH 2024 courses",
+    "id": "Rhyne2024c",
+    "issued": {
+      "date-parts": [
+        [
+          2024
+        ]
+      ]
+    },
+    "publisher": "Association for Computing Machinery",
+    "publisher-place": "New York, NY, USA",
+    "title": "Demystifying color in your digital media & data visualizations",
+    "type": "paper-conference"
+  },
+  {
+    "DOI": "10.1145/3664475.3664562",
+    "ISBN": "9798400706837",
+    "URL": "https://doi.org/10.1145/3664475.3664562",
+    "abstract": "Like a semester long graduate seminar on Optimization in Computer Graphics and Interactive Techniques, this course looks at Optimization through the lens of 13 technical papers selected by the lecturers. The lecturers will highlight trends, similarities, differences, and historical threads through the papers. The papers will cover a range of topics including numerical solutions, objective functions, discrete and continuous optimization, dimensionality reduction, and frictional contact. Applications will range from image segmentation to truss structures to real-time rendering.The course will also serve as a retrospective on the selected papers, placing them in historical perspective and highlighting significant contributions as well as forgotten gems.The lecturers have broad expertise across computer graphics and interactive techniques and have co-led the VANGOGH lab meeting at UMBC since 2015.",
+    "author": [
+      {
+        "family": "Bargteil",
+        "given": "Adam W."
+      },
+      {
+        "family": "Olano",
+        "given": "Marc"
+      }
+    ],
+    "collection-title": "SIGGRAPH courses ’24",
+    "container-title": "ACM SIGGRAPH 2024 courses",
+    "id": "Bargteil2024",
+    "issued": {
+      "date-parts": [
+        [
+          2024
+        ]
+      ]
+    },
+    "keyword": "computer graphics, optimization",
+    "publisher": "Association for Computing Machinery",
+    "publisher-place": "New York, NY, USA",
+    "title": "Optimization in computer graphics and interactive techniques",
+    "type": "paper-conference"
+  }
+]

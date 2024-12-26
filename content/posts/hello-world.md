@@ -4,7 +4,9 @@ draft = false
 title = 'Hello World'
 scripts = ["loci-reflection.js"]
 toc = true
-side = true
+side = false
+citation = "citation.json"
+bibliography = "citation.json"
 +++
 
 ## Introduction
@@ -13,8 +15,7 @@ Hello World! This is a test post demonstrating some features of markdown.
 
 ## Canvas
 
-Hugo allows you to put HTML elements inside snippets called shortcodes, which avoids having to add raw HTML to markdown files and helps with code reuse. The canvas shortcode can be called using the following syntax:
-
+Hugo allows you to put HTML elements inside snippets called shortcodes, which avoids having to add raw HTML to markdown files and helps with code reuse. The canvas shortcode can be called using the following syntax: {{< cite Glassner2024a >}}
 ```go {class="my-class" id="my-codeblock" lineNos=false tabWidth=2}
 {{</* canvas class="class-name" tabindex="0" */>}}
 ```
@@ -73,7 +74,7 @@ A custom class and id can be used to style or be used in javascript.
 
 ## Math
 
-The markdown for math equations uses KaTeX for rendering and must be put inside the math shortcode for proper alignment and resizing.
+The markdown for math equations uses KaTeX for rendering and must be put inside the math shortcode for proper alignment and resizing. {{< cite Glassner2024b >}}
 
 ```tex {class="my-class" id="my-codeblock" lineNos=false tabWidth=2}
 {{</* math */>}}
@@ -118,7 +119,7 @@ JS(\hat{y} || y) &= \frac{1}{2}(KL(y||\frac{y+\hat{y}}{2}) + KL(\hat{y}||\frac{y
 
 ## Information Boxes
 
-Information boxes give important information to the reader and is created using shortcodes.
+Information boxes give important information to the reader and is created using shortcodes. {{< cite Zicarelli2024 >}}
 
 ```go {class="my-class" id="my-codeblock" lineNos=false tabWidth=2}
 {{</* info-box information */>}}
@@ -127,9 +128,33 @@ Text goes inside here
 ```
 
 {{< info-box warning>}}
-Anim eiusmod irure incididunt sint cupidatat. Incididunt irure irure irure nisi ipsum do ut quis fugiat consectetur proident cupidatat incididunt cillum. Dolore voluptate occaecat qui mollit laborum ullamco et. Ipsum laboris officia anim laboris culpa eiusmod ex magna ex cupidatat anim ipsum aute. Mollit aliquip occaecat qui sunt velit ut cupidatat repre
+Anim eiusmod irure incididunt sint cupidatat. Incididunt irure irure irure nisi ipsum do ut quis fugiat consectetur proident cupidatat incididunt cillum. Dolore voluptate occaecat 
+qui mollit laborum ullamco et. Ipsum laboris officia anim laboris culpa eiusmod ex magna ex cupidatat anim ipsum aute. Mollit aliquip occaecat qui sunt velit ut cupidatat repre {{< cite Rhyne2024b>}}
 {{< /info-box >}}
 
 {{< info-box information>}}
-Anim eiusmod irure incididunt sint cupidatat. Incididunt irure irure irure nisi ipsum do ut quis fugiat consectetur proident cupidatat incididunt cillum. Dolore voluptate occaecat qui mollit laborum ullamco et. Ipsum laboris officia anim laboris culpa eiusmod ex magna ex cupidatat anim ipsum aute. Mollit aliquip occaecat qui sunt velit ut cupidatat repre
+Anim eiusmod irure incididunt sint cupidatat. Incididunt irure irure irure nisi ipsum do ut quis fugiat consectetur proident cupidatat incididunt cillum. Dolore voluptate occaecat 
+qui mollit laborum ullamco et. Ipsum laboris officia anim laboris culpa eiusmod ex magna ex cupidatat anim ipsum aute. Mollit aliquip occaecat qui sunt velit ut cupidatat repre
 {{< /info-box >}}
+
+## Figures
+
+You can add figures using the shortcode {{< cite Whitaker2024 >}}:
+
+```go {class="my-class" id="my-codeblock" lineNos=false tabWidth=2}
+{{</* figure src="logo.jpg" caption="This is a caption for the figure." align="center" attr="From {{< cite Shreiner2024 >}}" width="512px" height="512px" */>}}
+```
+
+{{< figure src="logo.jpg" caption="This is a caption for the figure." align="center" attr="From {{< cite Shreiner2024 >}}" width="512px" height="512px" />}}
+
+## Embedded Video
+
+Hugo supports embedding videos from youtube and vimdeo using the shortcodes: {{< cite Rhyne2024a >}}
+```go {class="my-class" id="my-codeblock" lineNos=false tabWidth=2}
+{{</* youtube 0RKpf3rK57I */>}}
+```
+{{< youtube 0RKpf3rK57I >}}
+
+## References
+
+{{< citation >}}
