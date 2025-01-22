@@ -4,7 +4,6 @@ title = 'Marschner Hair Shading Model'
 scripts = ["h-offset.js", "coordinate-frame.js", "bravais.js", "hcaustic.js", "loci-reflection.js", "loci-refraction.js", "hair-model.js", "reflection.js", "refraction.js", "path-length.js", "M-function-plot.js"]
 toc = true
 side = true
-draft = true
 tags = ['hair', 'marschner', 'rendering']
 bibliography = 'output.json'
 [build]
