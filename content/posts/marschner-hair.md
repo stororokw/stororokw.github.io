@@ -1,7 +1,7 @@
 +++
 date = '2024-12-06'
 title = 'Marschner Hair Shading Model'
-scripts = ["h-offset.js", "coordinate-frame.js", "bravais.js", "hcaustic.js", "loci-reflection.js", "loci-refraction.js", "hair-model.js", "reflection.js", "refraction.js", "path-length.js", "M-function-plot.js"]
+scripts = ["h-offset.js", "coordinate-frame.js", "bravais.js", "hcaustic.js", "loci-reflection.js", "loci-refraction.js", "hair-model.js", "reflection.js", "refraction.js", "path-length.js", "M-function-plot.js", "N-function-plot.js"]
 toc = true
 side = true
 tags = ['hair', 'marschner', 'rendering']
@@ -84,7 +84,7 @@ The hair fiber model is based on the hair structure and is approximated by a tra
     {{</group>}}
 {{</figure>}}
 
-* Refraction/Transmission: [Snell's law](https://en.wikipedia.org/wiki/Snell%27s_law) is used to determine the angle of the refracted ray when it passes from one medium to another. This is acheived by using the angle that the incoming light vector makes with the surface normal(incident angle) and the refractive indices of the two media. When light refracts into a medium with a higher index of refraction the angle of the refracted ray will be less than the incident angle thereby bending the ray closer to the normal.
+* Refraction/Transmission: [Snell's law](https://en.wikipedia.org/wiki/Snell%27s_law) is used to determine the angle of the refracted ray when it passes from one medium to another. This is achieved by using the angle that the incoming light vector makes with the surface normal(incident angle) and the refractive indices of the two media. When light refracts into a medium with a higher index of refraction the angle of the refracted ray will be less than the incident angle thereby bending the ray closer to the normal.
 @@@ \sin(\theta) \cdot \eta_1 = \sin(\beta) \cdot \eta_2 @@@
 
 {{<figure caption="Refraction">}}
@@ -205,7 +205,7 @@ From the two triangles formed by projecting each direction onto the normal plane
 
 @@@ \sin(\theta) \cdot \eta_1 = \sin(\beta) \cdot \eta_2 @@@
 
-Substituting @@ h_i @@ and @@ h_t @@ into Snells' law gives:
+Substituting @@ h_i @@ and @@ h_t @@ into Snell's law gives:
 
 \begin{equation} h_i = \eta h_t \nonumber \end{equation}
 
@@ -233,9 +233,9 @@ The Bravais index of refraction is used instead of the regular index of refracti
 
 In the figure below a ray intersecting a plane and refracting into a medium. @@ \omega_i @@ is the incident direction @@ \omega_i^{\prime} @@ is the incident direction projected onto the normal plane, and @@ \gamma @@ is the angle between the incident direction and the normal plane. Similarly, @@ s(\eta, v_i) @@ is the refracted direction and @@ s(\eta, v_i)^{\prime} @@ is the refracted direction projected onto the normal plane and @@ \delta @@ is the angle between the refracted direction and the normal plane.
 
-Furthermore @@ \sin\theta_i = \eta\sin\theta_t @@ and given that @@ \sin\theta_i = s_i @@, and @@ \sin\theta_t = s_t @@ where @@ s_i @@ is the length of the projection of @@ \omega_i @@ onto the horizontal plane, and @@ s_t @@ is the length of the projection of @@ s(\eta, \omega_i) @@ onto the horizontal plane. We can subsitute into the equations to find @@ s_t = \frac{s_i}{\eta} @@. This tells us that the projection of @@ \omega_i @@ onto the horizontal plane is @@ \eta @@ times more than the length of the projection of @@ \omega_t @@.
+Furthermore @@ \sin\theta_i = \eta\sin\theta_t @@ and given that @@ \sin\theta_i = s_i @@, and @@ \sin\theta_t = s_t @@ where @@ s_i @@ is the length of the projection of @@ \omega_i @@ onto the horizontal plane, and @@ s_t @@ is the length of the projection of @@ s(\eta, \omega_i) @@ onto the horizontal plane. We can substitute into the equations to find @@ s_t = \frac{s_i}{\eta} @@. This tells us that the projection of @@ \omega_i @@ onto the horizontal plane is @@ \eta @@ times more than the length of the projection of @@ \omega_t @@.
 
-@@ \alpha_i @@ is angle the incident direction @@ \omega_i @@ makes with the horizontal plane and @@ \alpha_i^\prime @@ is the angle the projected incident direction @@ \omega_i^\prime @@ makes with the horizontal plane. Simiarly @@ \alpha_t @@ is the angle the refracted direction @@ s(\eta, \omega_i) @@ makes with the horizontal plane, and @@ \alpha_t^\prime @@ is the angle the projected refracted direction @@ s(\eta, \omega_i)^\prime @@ makes with the horizontal plane.
+@@ \alpha_i @@ is angle the incident direction @@ \omega_i @@ makes with the horizontal plane and @@ \alpha_i^\prime @@ is the angle the projected incident direction @@ \omega_i^\prime @@ makes with the horizontal plane. Similarly @@ \alpha_t @@ is the angle the refracted direction @@ s(\eta, \omega_i) @@ makes with the horizontal plane, and @@ \alpha_t^\prime @@ is the angle the projected refracted direction @@ s(\eta, \omega_i)^\prime @@ makes with the horizontal plane.
 
 From the diagram the length of the projected incident direction @@ || \omega_i^{\prime} || @@ is equal to @@ \cos\gamma @@ and similarly the length of the projected refracted direction @@ || s(\eta, v_i)^{\prime} || @@ is equal to @@ \cos\delta @@. 
 
@@ -281,7 +281,7 @@ We can use this information to calculate the effective index of refraction for a
 
 @@@ \tag{8} \frac{\sin\gamma}{s_i} = \frac{\sin\delta}{\frac{s_i}{\eta}} @@@
 
-{{<p>}} Simpliying gives: {{</p>}}
+{{<p>}} Simplifying gives: {{</p>}}
 
 @@@ \tag{9} \sin\gamma = \eta\sin\delta @@@
 
@@ -506,13 +506,13 @@ Rearranging for the curve intensity @@ \overline{L}(\phi(h)) @@ gives:
 
 One way to think of the term @@ {\lvert \frac{d\phi}{dh} \lvert}^{-1} @@ is as a measure of how dense the rays are. For example in the case when @@ \frac{\mathrm{d} \phi}{\mathrm{d}h} = 0 @@ the value of the curve intensity is infinite due to the division by 0, this corresponds to all the rays being focused into a single direction. This singularity is called a caustic.
 
-For a circular cross section there will be two symmetric caustics which are the cause of the glints. As the bravais index increases with the angle to the normal plane @@ \theta @@, the two caustics will move closer to the normal plane as the ray direction becomes more parallel to the fiber. When @@ n^\prime @@ reaches a value of two, the caustic will disappear.
+For a circular cross section there will be two symmetric caustics which are the cause of the glints. As the bravais index increases with the angle to the normal plane @@ \theta @@, the two caustics will move closer to the normal plane as the ray direction becomes more parallel to the fiber. When @@ \eta^\prime @@ reaches a value of two, the caustic will disappear.
 
 #### Absorption and Fresnel Equations
 
 In this section we look at light absorption which gives color to the hair fiber, and the Fresnel equations which describe the reflection and transmission of light at the interface between the surface and interior.
 
-To calculate the absorption we must know the length of the path the light travels inside the fiber. From the figure below the cosine function can be used to find the length of each internal path segment @@ l = 2d @@. where @@ d = \cos\gamma_t @@. The absorption coefficient @@ \sigma_a @@ is defined as the probability density of an absorption scattering event occuring per unit distance. We can use Beer's law to calculate the fraction of light transmitted for a segment since the interior medium is homogeneous the absorption coefficient is constant:
+To calculate the absorption we must know the length of the path the light travels inside the fiber. From the figure below the cosine function can be used to find the length of each internal path segment @@ l = 2d @@. where @@ d = \cos\gamma_t @@. The absorption coefficient @@ \sigma_a @@ is defined as the probability density of an absorption scattering event ocurring per unit distance. We can use Beer's law to calculate the fraction of light transmitted for a segment since the interior medium is homogeneous the absorption coefficient is constant:
 
 We also need to take into account the change in the path length due to the refraction of the incident direction in the longitudinal plane, the distance the ray travels is a factor @@ \frac{1}{\cos\theta_t} @@ more.
 
@@ -527,7 +527,7 @@ We also need to take into account the change in the path length due to the refra
 {{</figure>}}
 
 
-The term for absorption for a ray that has travelled a distance of @@ l @@ is given by:
+The term for absorption for a ray that has traveled a distance of @@ l @@ is given by:
 
 {{<math>}}
 \begin{equation}
@@ -558,17 +558,93 @@ The azimuthal scattering function N is defined over all modes of reflection p, a
 {{</math>}}
 
 ### Solving the paths
-Equation 10
+
+To find angle @@ \phi @@ of the scattering path we need to solve equation (1) for the offset h. An approximation can be used instead of solving h exactly because it starts to get complicated after the first component. This approximation is used for the TRT component.
+
+#### Solving the mode p = 0 (Reflection)
+
+This path can be solve exactly for h. Given p = 0 and @@ h = \sin\gamma_i @@ rearranging for @@ \gamma_i @@ gives @@ \gamma_i = sin^{-1}h @@ we want to solve @@ \phi(p, h) - \phi = 0 @@ where @@ \phi(p, h) = 2p\gamma_t - 2\gamma_i + p\pi @@.
+
+@@@ h_{R} = \sin(\frac{\phi}{2}) @@@
+@@@ \frac{d\phi}{dh_R} = \frac{2}{\sqrt{1 - h_{R}^2}} @@@
+
+{{<details title="Derivation of h and @@ \frac{d\phi}{dh} @@ for the R component">}}
+
+@@@ \phi(p, h) - \phi = 0 @@@
+
+{{<p>}} substituting in @@ \phi(p,h) @@{{</p>}}
+
+@@@ 2p\gamma_t - 2\gamma_i + p\pi - \phi = 0 @@@
+
+{{<p>}} substituting in @@ p = 0 @@{{</p>}}
+
+@@@ -2\gamma_i - \phi = 0 @@@
+
+{{<p>}} rearranging for  @@ \gamma_i @@{{</p>}}
+
+@@@ \gamma_i = \frac{\phi}{2} @@@
+
+{{<p>}} substituting in @@ \gamma_i = sin^{-1}h @@{{</p>}}
+
+@@@ sin^{-1}h = \frac{\phi}{2} @@@
+
+@@@ h = \sin(\frac{\phi}{2}) @@@
+
+{{<p>}}  We need to also calculate @@ \frac{d\phi}{dh} @@ rearranging eq (2) for @@ \phi @@  {{</p>}}
+@@@ \phi = 2 \sin^{-1}h @@@
+
+{{<p>}} taking the derivative wrt h gives:{{</p>}}
+
+@@@ \frac{d\phi}{dh} = \frac{2}{\sqrt{1 - h^2}} @@@
+
+{{</details>}}
+
+#### Solving the mode p = 1 (Transmission)
+
+The complexity after the reflection mode increase exponentially, but this path can also be solved exactly and the results are included here from {{<cite `d'Eon2011`>}}.
+
+@@@ h_{TT} = \frac{\text{sign}(\phi)\cos(\frac{\phi}{2})}{\sqrt{1 + a^2 - 2a\space\text{sign}(\phi)\sin(\frac{\phi}{2})}} @@@
+
+where @@ a = \frac{1}{\eta^\prime} @@
+
+@@@ \frac{d\phi}{dh_{TT}} = \frac{2}{\eta^{\prime}\sqrt{1 - h_{TT}^2}} - \frac{2}{\sqrt{1 - h_{TT}^2}}@@@
+
+{{<details title="Derivation of @@ \frac{d\phi}{dh} @@ for the TT component">}}
+
+@@@ \phi(p, h) - \phi = 0 @@@
+
+{{<p>}} substituting in @@ \phi(p,h) @@ when @@ p = 1 @@ gives{{</p>}}
+
+@@@ 2\gamma_t - 2\gamma_i + \pi - \phi = 0 @@@
+
+{{<p>}} substituting values for @@ \gamma_t @@ and @@ \gamma_i @@ {{</p>}}
+
+@@@ 2\sin^{-1}(\frac{h}{\eta^\prime}) - 2\sin^{-1}h + 2\pi - \phi = 0 @@@
+
+{{<p>}}  Rearranging for @@ \phi @@ {{</p>}}
+
+@@@ \phi = 2\sin^{-1}(\frac{h}{\eta^\prime}) - 2\sin^{-1}h + 2\pi @@@
+
+{{<p>}}  Taking the deriviative wrt h gives: {{</p>}}
+
+@@@ \frac{d\phi}{dh} = \frac{2}{\eta^{\prime}\sqrt{1 - h^2}} - \frac{2}{\sqrt{1 - h^2}}@@@
+
+{{</details>}}
+
+#### Solving the mode p = 2 (TRT)
+
+For this path we solve the roots of equation (10) using a cubic root solver, which may have one or three roots corresponding to a single path or three paths. The paper {{<cite Marschner2003>}} provides a cubic polynomial approximation for @@ \gamma_t @@:
 {{<math>}}
 @@@
 \begin{align*}
-   \phi(p, h) &= 2p\gamma_t - 2\gamma_i + p\pi \\ 
    \gamma_t &= \frac{3c}{\pi}\gamma_i - \frac{4c}{\pi^3}\gamma_i^{3} \\   
 \end{align*}
 @@@
 {{</math>}}
 
 where @@c = \sin^{-1}(\frac{1}{\eta^{\prime}}) @@
+
+Substituting this into @@ \phi(p, h) = 2p\gamma_t - 2\gamma_i + p\pi @@ gives:
 
 {{<math>}}
 @@@
@@ -580,8 +656,147 @@ where @@c = \sin^{-1}(\frac{1}{\eta^{\prime}}) @@
 @@@
 {{</math>}}
 
+@@@ \tag{10} \hat{\phi}(p, \gamma_i) = (\frac{6pc}{\pi} - 2)\gamma_i - \frac{8pc}{\pi^3}\gamma_i^3 + p\pi @@@
+
+When p = 2:
+
+@@@ \hat{\phi}(p, \gamma_i) = (\frac{12c}{\pi} - 2)\gamma_i - \frac{16c}{\pi^3}\gamma_i^3 + 2\pi @@@
+
+and, we want to solve for @@ \gamma_i @@:
+
+@@@ \hat{\phi(p, h)} - \phi = 0 @@@
+
+Substituting into (10) into (2)
+
+@@@ (\frac{12c}{\pi} - 2)\gamma_i - \frac{16c}{\pi^3}\gamma_i^3 + (2\pi - \phi) = 0 @@@
+
+Once the value(s) of @@ \gamma_i @@ are found we can use @@ h = \sin\gamma_i @@ to find @@ h @@
+
+@@@ h_{TRT} = h_{\text{solve}}(p, r, \phi) @@@
+
+@@@ \frac{d\phi}{dh_{TRT}} = \frac{4}{\eta^{\prime}\sqrt{1 - (\frac{h_{TRT}}{\eta^\prime})^2}} - \frac{2}{\sqrt{1 - h_{TRT}^2}}@@@
+
+@@@ \frac{d^2\phi}{dh^2} = \frac{4h}{\eta^{\prime3}(1 - (\frac{h}{\eta^{\prime}})^2)^{\frac{3}{2}}} - \frac{2h}{(1-h^2)^{\frac{3}{2}}} @@@
+
+{{<details title="Derivation of @@ \frac{d\phi}{dh} @@ for the TRT component">}}
+
+@@@ \phi(p, h) - \phi = 0 @@@
+
+{{<p>}} substituting in @@ \phi(p,h) @@ when @@ p = 2 @@ gives{{</p>}}
+
+@@@ 4\gamma_t - 2\gamma_i + 2\pi - \phi = 0 @@@
+
+{{<p>}} substituting values for @@ \gamma_t @@ and @@ \gamma_i @@ {{</p>}}
+
+@@@ 4\sin^{-1}(\frac{h}{\eta^\prime}) - 2\sin^{-1}h + 2\pi - \phi = 0 @@@
+
+{{<p>}}  Rearranging for @@ \phi @@ {{</p>}}
+
+@@@ \phi = 4\sin^{-1}(\frac{h}{\eta^\prime}) - 2\sin^{-1}h + 2\pi @@@
+
+{{<p>}} Taking the deriviative wrt h gives: {{</p>}}
+
+@@@ \frac{d\phi}{dh} = \frac{4}{\eta^{\prime}\sqrt{1 - \frac{h}{\eta^{\prime}}^2 }} - \frac{2}{\sqrt{1 - h^2}}@@@
+
+{{</details>}}
+
+{{<details title="Derivation of @@ \frac{d^{2}\phi}{dh^2} @@ for the TRT component">}}
+
+@@@ \frac{d\phi}{dh} = \frac{4}{\eta^{\prime}\sqrt{1 - (\frac{h}{\eta^{\prime}})^2}} - \frac{2}{\sqrt{1 - h^2}}@@@
+
+{{<p>}} Taking the derivative of the above wrt h {{</p>}}
+
+@@@ \frac{d^2\phi}{dh^2} = \frac{d}{dh}\Big(\frac{4}{\eta^{\prime}\sqrt{1 - (\frac{h}{\eta^{\prime}})^2}}\Big) - \frac{d}{dh}\Big(\frac{2}{\sqrt{1 - h^2}}\Big)@@@
+
+@@@ \frac{d}{dh}\Big(\frac{4}{\eta^{\prime}\sqrt{1 - (\frac{h}{\eta^{\prime}})^2}}\Big) = \frac{4 \cdot -\frac{1}{2} \cdot - \frac{2h}{{\eta^{\prime2}}} }{\eta^\prime(1-(\frac{h}{\eta^{\prime}})^2)^{\frac{3}{2}}} = \frac{4h}{\eta^{\prime3}(1-(\frac{h}{\eta^{\prime}})^2)^{\frac{3}{2}}}@@@
+
+@@@ \frac{d}{dh}\Big(\frac{2}{\sqrt{1 - h^2}}\Big) = \frac{2 \cdot -\frac{1}{2} \cdot -2h}{(1-h^2)^{\frac{3}{2}}} = \frac{2h}{(1-h^2)^{\frac{3}{2}}} @@@
+
+{{<p>}} Substituting (3) and (4) back into (2) {{</p>}}
+
+@@@ \frac{d^2\phi}{dh^2} = \frac{4h}{\eta^{\prime3}(1 - (\frac{h}{\eta^{\prime}})^2)^{\frac{3}{2}}} - \frac{2h}{(1-h^2)^{\frac{3}{2}}} @@@
+
+{{</details>}}
 
 ## The Marschner Model
+
+The Marschner model is defined as:
+
+{{<math>}}
+@@@
+\begin{align*}
+    S(\phi_i, \theta_i, \phi_r, \theta_r) &= \\
+    &\space \frac{M_{R}(\theta_h)N_{R}(\eta^{\prime}(\eta, \theta_d), \phi)}{\cos^{2}\theta_d} \space + \\
+    &\space \frac{M_{TT}(\theta_h)N_{TT}(\eta^{\prime}(\eta, \theta_d), \phi)}{\cos^{2}\theta_d} \space + \\
+    &\space \frac{M_{TRT}(\theta_h)N_{TRT}(\eta^{\prime}(\eta, \theta_d), \phi)}{\cos^{2}\theta_d}
+\end{align*}
+@@@
+{{</math>}}
+
+Only the angles @@ \theta_d @@ , @@ \phi @@, @@ \theta_h @@, and @@ \phi_h @@ are used in the longitudinal and azimuthal scattering functions due to the symmetry of the scattering function S and hints at the reciprocity of the model.
+
+### Approximations for TRT (p = 2) mode
+
+The analysis on the [scattering from the cross section](#scattering-from-circular-cross-section) of a smooth cylinder showed that there will be two symmetric caustics for the TRT component. This results in two singularities with infinite intensity for the value of the function @@ N_{TRT}(\eta^{\prime}(\eta, \theta_d))@@ as shown in the figure below. This would not be the case if the surface roughness is modelled, so the Marschner model removes the caustics from the function and replaces them with a gaussian distribution lobe centered at the location of the caustics. The width of this distribution is used to approximate the roughness.
+
+The caustic appears when @@ \frac{d\phi}{dh} = 0 @@, and the angle @@ \phi @@ can be calculate from equation (1). When @@ \eta^\prime @@ reaches a value of two, the caustic will disappear.
+
+| Parameters              | Value       | Description                     |
+| :---------------------- | :-----------| :------------------------------ |
+| @@ k_{G}   @@           | [0.5, 5]    | Glint scale factor              |
+| @@ w_{c}  @@            | [10°, 25°]  | Azimuthal width of caustic      |
+| @@ \Delta\eta^\prime @@ | [0.2, 0.4]  | Fade range at the caustic merge |
+| @@ \Delta{h_{M}}    @@  | 0.5         | Caustic intensity limit         |
+
+{{<figure caption="Azimuthal scattering function N for TRT (p = 2)">}}
+    {{<canvas class="N-function-plot" width="512px" height="512px" tabindex="0">}}
+    {{<toolbox title="Azimuthal Scattering Function N (TRT) Debug">}}
+        {{<toolbox-container>}}
+            {{<toolbox-slider label="theta_d" id="N-function-plot-beta" min="0" max="90" step="0.1" defaultValue="0" unit="°">}}
+            {{<toolbox-slider label="wC" id="N-function-plot-wC" min="0" max="90" defaultValue="10" unit="°" step="0.1">}}
+            {{<toolbox-slider label="kG" id="N-function-plot-kG" min="0.5" max="5" defaultValue="0.5" step="0.1">}}
+            {{<toolbox-slider label="Δη'" id="N-function-plot-deltaEtaP" min="0.2" max="0.4" defaultValue="0.2" step="0.01">}}
+            {{<toolbox-slider label="ΔhM" id="N-function-plot-deltaHM" min="0" max="1" defaultValue="0.5" step="0.1">}}
+        {{</toolbox-container>}}
+        {{<group direction="row" width="fit-content" alignment="end">}}
+            {{<checkbox label="N_TRT" id="N-function-plot-trt" checked="true">}}
+            {{<checkbox label="N_TRT approximation" id="N-function-plot-trt-approximation">}}
+        {{</group>}}
+        {{<group direction="horizontal" alignment="end">}}
+            {{<button id="N-function-plot-reset" label="Reset Camera Position">}}
+        {{</group>}}
+    {{</toolbox>}}
+{{</figure>}}
+
+
+```cpp
+float3 N_TRT(float thetaD, float phi, float wC, float kG, float deltaEtaP, float deltaH_M)
+{
+  float hairIOR = 1.55;
+  float sinThetaD = sin(thetaD);
+  float cosThetaD = sqrt(1 - sinThetaD * sinThetaD);
+  float etaP = sqrt(hairIOR * hairIOR - sinThetaD * sinThetaD) / cosThetaD;
+    
+  float hC = sqrt((4 - etaP * etaP) / 3);
+  float phiC = asin(hC);
+  float dPhid2H2 = (4*hC) / pow(etaP*etaP - hC*hC, 3.0/2) - (2*hC) / pow(1 - hC*hC, 3.0/2);
+  float deltaH = min(deltaH_M, 2 * sqrt(2 * wC / abs(dPhid2H2)));
+  float t = 1;
+    
+  if(etaP >= 2)
+  {
+      phiC = 0;
+      deltaH = deltaH_M;
+      t = smoothstep(2, 2 + deltaEtaP, etaP);
+  }
+
+  L = Np(2, phi);
+  L = L * (1 - t * g(wC, phi - phic) / g(wC, 0));
+  L = L * (1 - t * g(wC, phi + phic) / g(wC, 0));
+  L = L + t * kG * A(2, thetaD, phi) * deltaH * (g(wC, phi - phiC) + g(wC, phi + phiC));
+  return L;
+}
+```
 
 ## Results
 
