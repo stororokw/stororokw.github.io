@@ -117,6 +117,11 @@ export class float3
                 this.x * m.m[2] +  this.y * m.m[5] + this.z * m.m[8]
             );
         }
+        else if(m instanceof float3)
+        {
+            return new float3(this.x * m.x, this.y * m.y, this.z * m.z);
+
+        }
         else if(m instanceof mat4x4)
         {
             const temp = new float4(this.x, this.y, this.z, 0);

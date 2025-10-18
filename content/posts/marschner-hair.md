@@ -1,7 +1,7 @@
 +++
 date = '2024-12-06'
 title = 'Marschner Hair Shading Model'
-scripts = ["h-offset.js", "coordinate-frame.js", "bravais.js", "hcaustic.js", "loci-reflection.js", "loci-refraction.js", "hair-model.js", "reflection.js", "refraction.js", "path-length.js", "M-function-plot.js", "N-function-plot.js"]
+scripts = ["h-offset.js", "coordinate-frame.js", "bravais.js", "hcaustic.js", "loci-reflection.js", "loci-refraction.js", "hair-model.js", "reflection.js", "refraction.js", "path-length.js", "M-function-plot.js", "N-function-plot.js", "hair-polar-plot.js"]
 toc = true
 side = true
 tags = ['hair', 'marschner', 'rendering']
@@ -800,7 +800,45 @@ float3 N_TRT(float thetaD, float phi, float wC, float kG, float deltaEtaP, float
 
 ## Results
 
+In this section we look at some of the results obtained from implementing Marscher's hair scattering model.
+
+Below is measured data plotted in polar coordinates from a gonioreflectometer to record the scattering of light on a single hair fiber in the incidence plane. It shows the scattering when the angle of incidence is set to 45° and the measuring device is swept through all outgoing directions in the incident plane.
+
+The measurements show that the scattering is off from the perfect specular direction R by about 5-10° towards the root, and that there is a strong color dependent scattering lobe for blonde hair shown by the separation of the red, green, and blue wavelengths.
+
+From the plot of the hair shading model we can observe similar behaviour.
+
+{{<figure src="marschner-polar-plot.png" caption="Polar plot of measured data from a strand of blonde hair in the longitudinal plane from {{<cite Marschner2003>}}" align="center" width="512px" loading="lazy"/>}}
+
+
+{{<figure caption="Marschner Hair Model Polar plot">}}
+    {{<canvas class="hair-polar-plot" width="512px" height="256px" tabindex="0">}}
+    {{<toolbox title="Scattering Polar Debug">}}
+        {{<toolbox-container>}}
+            {{<toolbox-slider label="theta" id="hair-polar-plot-theta" min="-90" max="90" step="0.1" defaultValue="45" unit="°">}}
+            {{<toolbox-slider label="alpha R" id="hair-polar-plot-alpha-r" min="-10" max="10" step="0.1" defaultValue="-5" unit="°">}}
+            {{<toolbox-slider label="beta R" id="hair-polar-plot-beta-r" min="0.1" max="10" step="0.01" defaultValue="4.5">}}
+            {{<toolbox-slider-float3 label="sigmaA" id="hair-polar-plot-sigmaA" min="0" max="1" step="0.01" defaultValue0="0.1" defaultValue1="0.185" defaultValue2="0.37">}}
+        {{</toolbox-container>}}
+        {{<group direction="horizontal" alignment="end">}}
+            {{<button id="hair-polar-plot-reset" label="Reset Camera Position">}}
+        {{</group>}}
+    {{</toolbox>}}
+{{</figure>}}
+
+### Visual Comparison to Photographs
+
+A useful technique in computer graphics is to visually compare a rendered image to a photograph, which is used as the ground truth to see how well the model can replicate the observed visual characteristics. The most well known example of this is the [Cornell box](https://en.wikipedia.org/wiki/Cornell_box). 
+
+In the figure below the photographs are used as the ground truth to evaluate the hair scattering model for various camera angles of the hair sample. The rendering is shown on the left and the photograph on the right for each camera view.
+
+While the model is not able to capture the extremely glossy and glinty textured appearance of the black hair sample I believe that it has been able to represent the general appearance of hair fairly well. Other short commings include the lack of multiple scattering, which is required to represent light colored hair. 
+
+In conclusion Marschner's hair scattering model that is able to capture the main characteristics of hair including the transmission of light through the hair fibers, the primary and secondary specular highlights, and to some extent the glints of the hair caused by the cylindrical geometry of the hair fiber.
+
 {{<figure src="marschner-hair-preview-black.png" caption="A comparison between realtime hair shading using the Marschner model + dual scattering, and reference photos from {{<cite Karis2016>}}" align="center" width="800px" loading="lazy"/>}}
+
+{{<figure src="marschner-hair-preview.png" caption="A comparison between realtime hair shading using the Marschner model + dual scattering, and reference photos from {{<cite Karis2016>}}" align="center" width="800px" loading="lazy"/>}}
 
 ## References
 
