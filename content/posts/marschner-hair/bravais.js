@@ -11,6 +11,8 @@ const ctx = canvas.getContext('2d');
 
 const thetaPicker = document.querySelector('#bravais-theta');
 const phiPicker = document.querySelector('#bravais-phi');
+const iorPicker = document.querySelector('#bravais-ior');
+
 const debugValuesCheckbox = document.querySelector('#bravais-debug-values');
 const debugAlphaCheckbox = document.querySelector('#bravais-debug-alpha');
 const debugThetaCheckbox = document.querySelector('#bravais-debug-theta');
@@ -20,10 +22,13 @@ const debugLengthCheckbox = document.querySelector('#bravais-debug-length');
 
 const output = document.querySelector('.bravais-theta');
 const output1 = document.querySelector('.bravais-phi');
+const output2 = document.querySelector('.bravais-ior');
+
 let clearColor = "#2b2b2b";
 
 let theta = degToRad(thetaPicker.value);
 let phi = degToRad(phiPicker.value);
+let IOR = Number(iorPicker.value);
 let showDebugValues = debugValuesCheckbox.checked;
 let showAlpha = debugAlphaCheckbox.checked;
 let showTheta = debugThetaCheckbox.checked;
@@ -40,6 +45,11 @@ phiPicker.addEventListener('input', () => {
     output1.textContent = `${phiPicker.value}°`;
     phi = degToRad(phiPicker.value);
 
+});
+
+iorPicker.addEventListener('input', () => {
+    output2.textContent = `${iorPicker.value}`;
+    IOR = Number(iorPicker.value);
 });
 
 debugValuesCheckbox.addEventListener('change', ()=>
@@ -647,7 +657,7 @@ function draw()
     const result = plane.intersect(ray);
     if(result.hit)
     {
-        const hairIOR = 1.55;
+        const hairIOR = IOR;
         const airIOR = 1.0;
         const eta = airIOR / hairIOR;
         const wr = refract(wi.neg(), result.normal, eta);

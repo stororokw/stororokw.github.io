@@ -1,6 +1,6 @@
 import {float2, float3, float4, mat4x4, mul, dot, Camera, OrthonormalBasis, OrthographicCamera, 
     normalize, degToRad, radToDeg, Ray, Cylinder, Plane, 
-    refract, negative, projectToPlane, reflect, CylinderY,clamp,
+    refract, negative, projectToPlane, reflect, CylinderY,clamp, saturate,
     project} from "./math.js"
 
     
@@ -36,6 +36,9 @@ const output6 = document.querySelector('.hair-polar-plot-sigmaA1');
 const output7 = document.querySelector('.hair-polar-plot-sigmaA2');
 
 const resetButton = document.querySelector('#hair-polar-plot-reset');
+const blackHairPresetButton = document.querySelector('#hair-polar-plot-black-hair-preset');
+const blondeHairPresetButton = document.querySelector('#hair-polar-plot-blonde-hair-preset');
+const syntheticHairPresetButton = document.querySelector('#hair-polar-plot-synthetic-hair-preset');
 
 thetaPicker.addEventListener('input', () => {
     output.textContent = thetaPicker.value + "°";
@@ -182,6 +185,70 @@ window.addEventListener("mouseup", e => {
     }
 });
 
+blackHairPresetButton.addEventListener("click", () => {
+    // r
+    sigmaAPickerRedChannel.value = 0.5;
+    output5.textContent = sigmaAPickerRedChannel.value;
+    // g
+    sigmaAPickerGreenChannel.value = 0.55;
+    output6.textContent = sigmaAPickerGreenChannel.value;
+    // b
+    sigmaAPickerBlueChannel.value = 0.6;
+    output7.textContent = sigmaAPickerBlueChannel.value;
+    sigmaA = new float3(Number(sigmaAPickerRedChannel.value), Number(sigmaAPickerGreenChannel.value), Number(sigmaAPickerBlueChannel.value));
+
+    alphaRPicker.value = -8.5;
+    output3.textContent = alphaRPicker.value + "°";
+    alphaR = degToRad(clamp(alphaRPicker.value, -89.4, 89.4));
+
+    betaRPicker.value = 6;
+    output4.textContent = betaRPicker.value + "°";
+    betaR = degToRad(clamp(betaRPicker.value, -89.4, 89.4));
+});
+
+blondeHairPresetButton.addEventListener("click", () => {
+    // r
+    sigmaAPickerRedChannel.value = 0.1;
+    output5.textContent = sigmaAPickerRedChannel.value;
+    // g
+    sigmaAPickerGreenChannel.value = 0.2;
+    output6.textContent = sigmaAPickerGreenChannel.value;
+    // b
+    sigmaAPickerBlueChannel.value = 0.33;
+    output7.textContent = sigmaAPickerBlueChannel.value;
+    sigmaA = new float3(Number(sigmaAPickerRedChannel.value), Number(sigmaAPickerGreenChannel.value), Number(sigmaAPickerBlueChannel.value));
+
+    alphaRPicker.value = -5;
+    output3.textContent = alphaRPicker.value + "°";
+    alphaR = degToRad(clamp(alphaRPicker.value, -89.4, 89.4));
+
+    betaRPicker.value = 4.5;
+    output4.textContent = betaRPicker.value + "°";
+    betaR = degToRad(clamp(betaRPicker.value, -89.4, 89.4));
+});
+
+syntheticHairPresetButton.addEventListener("click", () => {
+    // r
+    sigmaAPickerRedChannel.value = 0.46;
+    output5.textContent = sigmaAPickerRedChannel.value;
+    // g
+    sigmaAPickerGreenChannel.value = 0.52;
+    output6.textContent = sigmaAPickerGreenChannel.value;
+    // b
+    sigmaAPickerBlueChannel.value = 0.54;
+    output7.textContent = sigmaAPickerBlueChannel.value;
+    sigmaA = new float3(Number(sigmaAPickerRedChannel.value), Number(sigmaAPickerGreenChannel.value), Number(sigmaAPickerBlueChannel.value));
+
+    alphaRPicker.value = 0;
+    output3.textContent = alphaRPicker.value + "°";
+    alphaR = degToRad(clamp(alphaRPicker.value, -89.4, 89.4));
+
+    betaRPicker.value = 4.75;
+    output4.textContent = betaRPicker.value +"°";
+    betaR = degToRad(betaRPicker.value);
+
+});
+
 resetButton.addEventListener("click", () => {
     camera.distance = 0.105;
     camera.focus.y = 1;
@@ -190,7 +257,6 @@ resetButton.addEventListener("click", () => {
     camera.movement.z = 0;
     camera.focus.x = 0;
 });
-
 
 let camera = new OrthographicCamera(25, 25 / aspectRatio, 0.1, 1000);
 camera.distance = 0.105;
@@ -471,7 +537,7 @@ function draw()
 
     // Draw Axes
     ctx.strokeStyle = "white";
-    drawLine(new float3(-width * 0.25, 0, 0), new float3(width * 0.25, 0, 0), camera);
+    drawLine(new float3(-DiagramScaleInPixels * Math.sqrt(10), 0, 0), new float3(DiagramScaleInPixels * Math.sqrt(10), 0, 0), camera);
 
     // Draw arc thetaR
     {
@@ -885,7 +951,7 @@ function draw()
 
                 let cosPhi = Math.cos(phiD);
 
-                let h = Math.sin(theta);
+                let h = Math.sin(phi);
                 let sinGammaI = h;
                 let cosGammaI = Math.sqrt(1 - sinGammaI * sinGammaI);
                 let etaP = Math.sqrt(eta * eta - sinThetaI * sinThetaI) / cosThetaI;
@@ -895,9 +961,9 @@ function draw()
                 let sinThetaT = sinThetaO / eta;
                 let cosThetaT = Math.sqrt(1 - sinThetaT * sinThetaT);
 
-                let alphaTT = -alphaR / 2;
+                let alphaTT = -alphaR / 1.5;
                 let betaTT = betaR / 2;
-                let alphaTRT = -3 * alphaR / 2;
+                let alphaTRT = -3 * alphaR / 4;
                 let betaTRT = 2 * betaR;
 
                 let M_p0 = Gaussian(betaR, thetaH, -alphaR);
@@ -922,17 +988,27 @@ function draw()
                 let gammaTRT = Math.asin(h_p2/ etaP);
                 let dPhidH_p2 = (2 / Math.sqrt(1 - h_p2 * h_p2)) - (4 / (etaP * Math.sqrt(1 - Math.pow(h_p2 / etaP, 2))));
                 let N_p2 = 1 / (Math.abs(2 * dPhidH_p2));
-
+                // limit the value since this can go to inf
+                N_p2 = Math.min(N_p2, 3);
                 let A_p2 = T1(sigmaA, gammaTRT, cosThetaT);
                 A_p2.x *= A_p2.x;
                 A_p2.y *= A_p2.y;
                 A_p2.z *= A_p2.z;
                 A_p2 = A_p2.mul(2 * Math.pow(1 - fresnel(Math.cos(gammaTRT), 1, etaP), 2.0) * Math.pow(fresnel(Math.cos(gammaTRT), 1, etaP), 1.0) );
-                r = new float3(M_p0 * N_p0 * A_p0).add(A_p1.mul(M_p1 * N_p1).add(A_p2.mul(M_p2 * N_p2))).div(Math.pow(cosThetaD, 2));
-                // r = new float3(M_p0 * N_p0 * A_p0).div(Math.pow(cosThetaD, 2));
-                r.x = Math.sqrt(r.x);
-                r.y = Math.sqrt(r.y);
-                r.z = Math.sqrt(r.z);
+                r = new float3(M_p0 * N_p0 * A_p0).add(A_p1.mul(M_p1 * N_p1)).add(A_p2.mul(M_p2 * N_p2)).div(Math.pow(cosThetaD, 2));
+                
+                // Add a diffuse component in lieu of multiple scattering
+                let N = new float3(0, 0, 1);
+                let F_L = Math.pow(1 - dot(N, L), 5);
+                let F_V = Math.pow(1 - dot(N, V), 5);
+
+                // let diffuse = new float3((1 - sigmaA.x) * 1, (1 - sigmaA.y) * 0.75, (1 - sigmaA.z) * 0.5);
+                let diffuse = new float3((1 - sigmaA.x) * (1 - sigmaA.x), (1 - sigmaA.y) * (1 - sigmaA.y) , (1 - sigmaA.z) * (1 - sigmaA.z));
+                diffuse = diffuse.mul((1 - 0.5 * F_L) * (1 - 0.5 * F_V) / Math.PI);
+
+                r.x = Math.sqrt(r.x + diffuse.x);
+                r.y = Math.sqrt(r.y + diffuse.y);
+                r.z = Math.sqrt(r.z + diffuse.z);
                 
                 maxR = Math.max(Math.max(Math.max(maxR, r.x), r.y), r.z);
                 points.push(new float2(r.x * Math.cos(angle), r.x * Math.sin(angle)));
@@ -944,7 +1020,7 @@ function draw()
             let projectedPoints = [];
             let projectedPoints1 = [];
             let projectedPoints2 = [];
-            maxR = 2;
+            // maxR = 2;
             for (let i = 0; i < points.length; ++i)
             {
                 let v = new float3(DiagramScaleInPixels * points[i].x / maxR * Math.sqrt(10), DiagramScaleInPixels * points[i].y / maxR * Math.sqrt(10), 0);
@@ -954,6 +1030,20 @@ function draw()
                 projectedPoints1.push(projectPointToScreen(v1, width, height, viewProjection));
                 projectedPoints2.push(projectPointToScreen(v2, width, height, viewProjection));
             }               
+
+            ctx.strokeStyle = "rgb(255 0 0 / 75%)";
+            ctx.lineWidth = 2.5;
+            ctx.beginPath();
+            for(let i = 0; i < projectedPoints.length; ++i)
+            {
+                const p = projectedPoints[i];
+                if(i == 0)
+                {
+                    ctx.moveTo(p.x, p.y);
+                }
+                ctx.lineTo(p.x, p.y);
+            }
+            ctx.stroke();
 
             ctx.strokeStyle = "rgb(0 255 0 / 75%)";
             ctx.lineWidth = 2.5;
@@ -982,20 +1072,6 @@ function draw()
                 ctx.lineTo(p.x, p.y);
             }
             ctx.stroke();
-                        ctx.strokeStyle = "rgb(255 0 0 / 75%)";
-            ctx.lineWidth = 2.5;
-            ctx.beginPath();
-            for(let i = 0; i < projectedPoints.length; ++i)
-            {
-                const p = projectedPoints[i];
-                if(i == 0)
-                {
-                    ctx.moveTo(p.x, p.y);
-                }
-                ctx.lineTo(p.x, p.y);
-            }
-            ctx.stroke();
-
         }
 
 

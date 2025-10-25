@@ -161,7 +161,8 @@ There are some derived angles that will be useful:
 
 ## Radiometry
 
-(todo)
+Radiometry is concerned with the measurement of electromagnetic radation and of particular interest is the measurement of visible light since we want to know how much light incident on a hair fiber is scattered towards the viewer.
+
 
 ## Scattering from Fibers
 
@@ -314,6 +315,7 @@ We can use this information to calculate the effective index of refraction for a
         {{<toolbox-container>}}
             {{<toolbox-slider label="theta" id="bravais-theta" min="-90" max="90" defaultValue="-35" suffix="°">}}
             {{<toolbox-slider label="phi" id="bravais-phi" min="-180" max="180" defaultValue="140" suffix="°">}}
+            {{<toolbox-slider label="IOR" id="bravais-ior" min="1" max="2" defaultValue="1.55" step="0.01">}}
         {{</toolbox-container>}}
         {{<group direction="row" width="fit-content" alignment="end">}}
             {{<checkbox label="alpha" id="bravais-debug-alpha">}}
@@ -353,6 +355,13 @@ where @@ g(\beta, \phi_h - \alpha) @@ is the normalized gaussian distribution fu
 \end{align*}
 @@@
 {{</math>}}
+
+```js
+function Gaussian(beta, angle, alpha)
+{
+    return (1.0 / (beta * sqrt(2 * PI))) * exp(-(0.5 * sqr((angle - alpha) / beta)));
+}
+```
 
 | Parameters          | Value                   | Description                         |
 | :------------------ | :---------------------- | :---------------------------------- |
@@ -737,9 +746,9 @@ Only the angles @@ \theta_d @@ , @@ \phi @@, @@ \theta_h @@, and @@ \phi_h @@ ar
 
 ### Approximations for TRT (p = 2) mode
 
-The analysis on the [scattering from the cross section](#scattering-from-circular-cross-section) of a smooth cylinder showed that there will be two symmetric caustics for the TRT component. This results in two singularities with infinite intensity for the value of the function @@ N_{TRT}(\eta^{\prime}(\eta, \theta_d))@@ as shown in the figure below. This would not be the case if the surface roughness is modelled, so the Marschner model removes the caustics from the function and replaces them with a gaussian distribution lobe centered at the location of the caustics. The width of this distribution is used to approximate the roughness.
+The analysis on the [scattering from the cross section](#scattering-from-circular-cross-section) of a smooth cylinder showed that there will be two symmetric caustics for the TRT component. This results in two singularities with infinite intensity for the value of the function @@ N_{TRT}(\eta^{\prime}(\eta, \theta_d))@@ as shown in the figure below, this is due to the model using a smooth cylinder for analysis. So to fix this problem the Marschner model effectively removes the caustics from the function and replaces them with a gaussian distribution lobe centered at the location of the two caustics. The width of this distribution is used to approximate the roughness.
 
-The caustic appears when @@ \frac{d\phi}{dh} = 0 @@, and the angle @@ \phi @@ can be calculate from equation (1). When @@ \eta^\prime @@ reaches a value of two, the caustic will disappear.
+We know that the caustic appears when @@ \frac{d\phi}{dh} = 0 @@, and the angle @@ \phi @@ when this occurs can be calculate from equation @@ h = \pm\sqrt{\frac{4 - \eta^{\prime}{^2}}{3}} @@. When @@ \eta^\prime @@ reaches a value of two, the caustic will disappear.
 
 | Parameters              | Value       | Description                     |
 | :---------------------- | :-----------| :------------------------------ |
@@ -806,10 +815,19 @@ Below is measured data plotted in polar coordinates from a gonioreflectometer to
 
 The measurements show that the scattering is off from the perfect specular direction R by about 5-10° towards the root, and that there is a strong color dependent scattering lobe for blonde hair shown by the separation of the red, green, and blue wavelengths.
 
-From the plot of the hair shading model we can observe similar behaviour.
+From the interactive plot of the hair shading model we can observe similar behaviour.
 
-{{<figure src="marschner-polar-plot.png" caption="Polar plot of measured data from a strand of blonde hair in the longitudinal plane from {{<cite Marschner2003>}}" align="center" width="512px" loading="lazy"/>}}
-
+{{<gallery src="marschner-polar-plot-blonde-hair.png" width="100%" height="auto" loading="lazy">}}
+    {{<gallery-button-group>}}
+    {{<gallery-image label="Black" id="black" name="hair" src="marschner-polar-plot-black-hair" loading="lazy">}}
+    {{<gallery-image label="Blonde" id="blonde" name="hair" src="marschner-polar-plot-blonde-hair" loading="lazy" checked="true">}}
+    {{<gallery-image label="Synthetic" id="synthetic" name="hair" src="marschner-polar-plot-synthetic-hair" loading="lazy">}}
+    {{</gallery-button-group>}}
+    {{<gallery-selector-group>}}
+        {{<gallery-selector label="45 degrees" id="45deg" name="angle" src="45deg" checked="true">}}
+        {{<gallery-selector label="-45 degrees" id="neg45deg" name="angle" src="neg45deg">}}
+    {{</gallery-selector-group>}}
+{{</gallery>}}
 
 {{<figure caption="Marschner Hair Model Polar plot">}}
     {{<canvas class="hair-polar-plot" width="512px" height="256px" tabindex="0">}}
@@ -817,9 +835,17 @@ From the plot of the hair shading model we can observe similar behaviour.
         {{<toolbox-container>}}
             {{<toolbox-slider label="theta" id="hair-polar-plot-theta" min="-90" max="90" step="0.1" defaultValue="45" unit="°">}}
             {{<toolbox-slider label="alpha R" id="hair-polar-plot-alpha-r" min="-10" max="10" step="0.1" defaultValue="-5" unit="°">}}
-            {{<toolbox-slider label="beta R" id="hair-polar-plot-beta-r" min="0.1" max="10" step="0.01" defaultValue="4.5">}}
-            {{<toolbox-slider-float3 label="sigmaA" id="hair-polar-plot-sigmaA" min="0" max="1" step="0.01" defaultValue0="0.1" defaultValue1="0.185" defaultValue2="0.37">}}
+            {{<toolbox-slider label="beta R" id="hair-polar-plot-beta-r" min="0.1" max="10" step="0.01" defaultValue="4.5" unit="°">}}
+            {{<toolbox-slider-float3 label="sigmaA" id="hair-polar-plot-sigmaA" min="0" max="1" step="0.01" defaultValue0="0.1" defaultValue1="0.2" defaultValue2="0.33">}}
         {{</toolbox-container>}}
+        {{<group direction="column" width="fit-content" alignment="start">}}
+            {{<label text="Hair Setting Presets">}}
+        {{</group>}}
+        {{<group direction="horizontal" alignment="end">}}
+            {{<button id="hair-polar-plot-black-hair-preset" label="Black Hair">}}
+            {{<button id="hair-polar-plot-blonde-hair-preset" label="Blonde Hair">}}
+            {{<button id="hair-polar-plot-synthetic-hair-preset" label="Synthetic Hair">}}
+        {{</group>}}
         {{<group direction="horizontal" alignment="end">}}
             {{<button id="hair-polar-plot-reset" label="Reset Camera Position">}}
         {{</group>}}
@@ -828,13 +854,13 @@ From the plot of the hair shading model we can observe similar behaviour.
 
 ### Visual Comparison to Photographs
 
-A useful technique in computer graphics is to visually compare a rendered image to a photograph, which is used as the ground truth to see how well the model can replicate the observed visual characteristics. The most well known example of this is the [Cornell box](https://en.wikipedia.org/wiki/Cornell_box). 
+A useful technique in computer graphics is to visually compare a rendered image to a photograph, which is used as the ground truth to see how well the model can replicate the observed visual characteristics. The most well known example of this is the [Cornell Box](https://en.wikipedia.org/wiki/Cornell_box). 
 
 In the figure below the photographs are used as the ground truth to evaluate the hair scattering model for various camera angles of the hair sample. The rendering is shown on the left and the photograph on the right for each camera view.
 
-While the model is not able to capture the extremely glossy and glinty textured appearance of the black hair sample I believe that it has been able to represent the general appearance of hair fairly well. Other short commings include the lack of multiple scattering, which is required to represent light colored hair. 
+While the model is not able to capture the extremely glossy and glinty textured appearance of the black hair sample I believe that it has been able to represent the general appearance of hair particularly well. Other shortcomings include the lack of multiple scattering, which is required to represent light colored hair. 
 
-In conclusion Marschner's hair scattering model that is able to capture the main characteristics of hair including the transmission of light through the hair fibers, the primary and secondary specular highlights, and to some extent the glints of the hair caused by the cylindrical geometry of the hair fiber.
+In conclusion Marschner's hair scattering model is able to capture some of the main characteristics of hair including the transmission of light through the hair fibers, the primary and secondary specular highlights, and to some extent the glints of the hair caused by the cylindrical geometry of the hair fiber focusing the light.
 
 {{<figure src="marschner-hair-preview-black.png" caption="A comparison between realtime hair shading using the Marschner model + dual scattering, and reference photos from {{<cite Karis2016>}}" align="center" width="800px" loading="lazy"/>}}
 

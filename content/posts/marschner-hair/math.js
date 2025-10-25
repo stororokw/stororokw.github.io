@@ -1551,6 +1551,11 @@ export function clamp(x, a, b)
     return Math.min(Math.max(x, a), b);
 }
 
+export function saturate(x)
+{
+    return Math.min(Math.max(x, 0), 1);
+}
+
 export function refract(wi, n, ior)
 {
     const wiDotN = dot(wi, n);
